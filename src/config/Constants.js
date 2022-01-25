@@ -3,6 +3,7 @@ export const ScreenNames = {
     SIGN_UP_SCREEN: 'SIGN_UP_SCREEN',
     HOME_SCREEN: 'HOME_SCREEN',
     CAMPAIGN_SCREEN: 'CAMPAIGN_SCREEN',
+    BOOKINGS_SCREEN: 'BOOKINGS_SCREEN',
 }
 
 export const AsyncStorageKeys = {

@@ -8,6 +8,7 @@ import LoginScreen from '../screens/login/LoginScreen';
 import SignUpScreen from '../screens/signup/SignUpScreen';
 import HomeScreen from '../screens/home/HomeScreen';
 import CampaignScreen from '../screens/campaign/CampaignScreen';
+import BookingsScreen from '../screens/bookings/BookingsScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -39,6 +40,10 @@ const AppNavigator = () => {
                 <Stack.Screen
                     name={ScreenNames.CAMPAIGN_SCREEN}
                     component={CampaignScreen} />
+
+                <Stack.Screen
+                    name={ScreenNames.BOOKINGS_SCREEN}
+                    component={BookingsScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     );

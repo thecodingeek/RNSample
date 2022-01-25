@@ -24,7 +24,7 @@ const CampaignScreen = (props) => {
         const strBookings = await getString(AsyncStorageKeys.BOOKINGS);
         const bookings = [];
         if(strBookings && strBookings.length > 0) {
-            bookings.push([...JSON.parse(strBookings)]);
+            bookings.push(...JSON.parse(strBookings));
         }
         bookings.push(currentCampaign);
         await storeString(AsyncStorageKeys.BOOKINGS, JSON.stringify(bookings));

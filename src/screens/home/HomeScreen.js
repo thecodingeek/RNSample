@@ -52,10 +52,11 @@ const HomeScreen = (props) => {
     )
 
     const onBookingClicked = () => {
-
+        navigation.navigate(ScreenNames.BOOKINGS_SCREEN);
     }
 
     const onLogout = async () => {
+        await storeString(AsyncStorageKeys.BOOKINGS, '');
         await storeString(AsyncStorageKeys.IS_USER_LOGGED_IN, 'false');
         navigation.replace(ScreenNames.LOGIN_SCREEN);
     }
