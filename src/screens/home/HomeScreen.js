@@ -33,7 +33,9 @@ const HomeScreen = (props) => {
     const renderCampaign = ({ item, index }) => (
         <TouchableOpacity
             onPress={() => {
-                
+                navigation.navigate(ScreenNames.CAMPAIGN_SCREEN, {
+                    currentCampaign: item,
+                });
             }}>
             <View style={styles.campaignContainer}>
                 <MyText>
