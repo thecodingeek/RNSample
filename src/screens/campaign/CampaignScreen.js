@@ -5,7 +5,7 @@ import MyText from '../../components/text/MyText';
 import screenStyles from './styles';
 import MyButton from '../../components/button/MyButton';
 import MyBackButton from '../../components/back/MyBackButton';
-import { storeString } from '../../storage/AsyncStorageHelper';
+import { storeString, getString, } from '../../storage/AsyncStorageHelper';
 import { AsyncStorageKeys, ScreenNames } from '../../config/Constants';
 
 const CampaignScreen = (props) => {
@@ -20,8 +20,15 @@ const CampaignScreen = (props) => {
         setCurrentCampaign(currentCampaign);
     }, []);
 
-    const onBookClicked = () => {
-
+    const onBookClicked = async () => {
+        const strBookings = await getString(AsyncStorageKeys.BOOKINGS);
+        const bookings = [];
+        if(strBookings && strBookings.length > 0) {
+            bookings.push([...JSON.parse(strBookings)]);
+        }
+        bookings.push(currentCampaign);
+        await storeString(AsyncStorageKeys.BOOKINGS, JSON.stringify(bookings));
+        navigation.goBack();
     }
 
     return (
