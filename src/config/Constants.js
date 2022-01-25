@@ -5,5 +5,6 @@ export const ScreenNames = {
 }
 
 export const AsyncStorageKeys = {
-    
+    USER: 'USER',
+    IS_USER_LOGGED_IN: 'IS_USER_LOGGED_IN',
 }

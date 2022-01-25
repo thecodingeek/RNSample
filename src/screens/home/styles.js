@@ -10,6 +10,11 @@ const styles = () => {
             color: Colors[colorScheme].reverseTextColor,
             textAlign: 'center',
         },
+        button: {
+            width: '70%',
+            marginTop: Dimensions.xLargeMargin,
+            marginBottom: Dimensions.xxLargeMargin,
+        },
     });
 }
 

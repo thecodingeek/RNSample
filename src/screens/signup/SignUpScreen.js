@@ -1,13 +1,14 @@
 import React, { useState, } from 'react';
 import { SafeAreaView, View, KeyboardAvoidingView, ScrollView, Image, Button, TouchableOpacity, } from 'react-native';
 import CommonStyles from '../../styles/CommonStyles';
-import { ScreenNames, } from '../../config/Constants';
+import { AsyncStorageKeys, ScreenNames, } from '../../config/Constants';
 import MyText from '../../components/text/MyText';
 import MyTextInput from '../../components/textInput/MyTextInput';
 import MyButton from '../../components/button/MyButton';
 import MyBackButton from '../../components/back/MyBackButton';
 import screenStyles from './styles';
 import { isEmailValid } from '../../helpers/HelperFunctions';
+import { storeString } from '../../storage/AsyncStorageHelper';
 
 const SignUpScreen = (props) => {
     const { navigation } = props;
@@ -27,7 +28,7 @@ const SignUpScreen = (props) => {
         setErrors(tempErrors);
     }
 
-    const onFurtherClick = () => {
+    const onSignUpClicked = async () => {
         let isError = false;
         let tempErrors = {...errors};
 
@@ -70,6 +71,11 @@ const SignUpScreen = (props) => {
         if(isError) {
             return;
         }
+
+        await storeString(AsyncStorageKeys.USER, JSON.stringify(user));
+        await storeString(AsyncStorageKeys.IS_USER_LOGGED_IN, 'true');
+
+        navigation.replace(ScreenNames.HOME_SCREEN);
     }
 
     return (
@@ -126,8 +132,8 @@ const SignUpScreen = (props) => {
 
                     <MyButton
                         containerStyle={styles.button}
-                        onPress={onFurtherClick}>
-                        Further
+                        onPress={onSignUpClicked}>
+                        Sign Up
                     </MyButton>
                 </ScrollView>
             </KeyboardAvoidingView>

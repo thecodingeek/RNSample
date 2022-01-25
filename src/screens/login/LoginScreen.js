@@ -1,18 +1,20 @@
-import React, { useState, } from 'react';
+import React, { useEffect, useState, } from 'react';
 import { SafeAreaView, KeyboardAvoidingView, ScrollView, Image, TouchableOpacity, } from 'react-native';
 import CommonStyles from '../../styles/CommonStyles';
-import { ScreenNames, } from '../../config/Constants';
+import { AsyncStorageKeys, ScreenNames, } from '../../config/Constants';
 import MyText from '../../components/text/MyText';
 import MyTextInput from '../../components/textInput/MyTextInput';
 import MyButton from '../../components/button/MyButton';
 import screenStyles from './styles';
 import { isEmailValid, showAlertDialog } from '../../helpers/HelperFunctions';
+import { getString } from '../../storage/AsyncStorageHelper';
 
 const LoginScreen = (props) => {
     const { navigation } = props;
     const commonStyles = CommonStyles();
     const styles = screenStyles();
 
+    const [availableUser, setAvailableUser] = useState({});
     const [user, setUser] = useState({});
     const [errors, setErrors] = useState({});
 
@@ -51,7 +53,33 @@ const LoginScreen = (props) => {
         if (isError) {
             return;
         }
+
+        if(availableUser.email) {
+            if(availableUser.email === user.email && availableUser.password === user.password) {
+                navigation.replace(ScreenNames.HOME_SCREEN);
+            } else {
+                showAlertDialog('', 'Invalid Credentials');    
+            }
+        } else {
+            showAlertDialog('', 'Please Sign Up');
+        }
     }
+
+    useEffect(() => {
+        const getUser = async () => {
+            const strUser = await getString(AsyncStorageKeys.USER);
+            const isUserLoggedIn = await getString(AsyncStorageKeys.IS_USER_LOGGED_IN);
+
+            if(strUser && strUser.length > 0) {
+                setAvailableUser(JSON.parse(strUser));
+            }
+            if(isUserLoggedIn && isUserLoggedIn === 'true') {
+                navigation.replace(ScreenNames.HOME_SCREEN);
+            }
+        }
+
+        getUser();
+    }, []);
 
     return (
         <SafeAreaView style={[commonStyles.container, styles.container]}>
@@ -103,9 +131,6 @@ const LoginScreen = (props) => {
 
                     <TouchableOpacity
                         onPress={() => {
-                            if (isLoading) {
-                                return;
-                            }
                             navigation.navigate(ScreenNames.SIGN_UP_SCREEN);
                         }}
                         style={styles.signUpContainer}>
