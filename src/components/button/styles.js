@@ -9,7 +9,7 @@ const styles = () => {
             width: '100%',
             borderWidth: 1,
             borderColor: Colors[colorScheme].foregroundColor,
-            borderRadius: Dimensions.normalBorderRadius,
+            borderRadius: 20,
             backgroundColor: Colors[colorScheme].foregroundColor,
             alignItems: 'center'
         },
@@ -22,7 +22,7 @@ const styles = () => {
             width: '100%',
             borderWidth: 1,
             borderColor: Colors[colorScheme].foregroundColor,
-            borderRadius: Dimensions.normalBorderRadius,
+            borderRadius: 20,
             backgroundColor: Colors[colorScheme].backgroundColor,
             alignItems: 'center'
         },

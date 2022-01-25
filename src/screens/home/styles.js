@@ -6,14 +6,20 @@ const styles = () => {
     const colorScheme = useColorScheme();
     return StyleSheet.create({
         title: {
-            fontSize: Dimensions.headerFontSize,
-            color: Colors[colorScheme].reverseTextColor,
+            fontSize: Dimensions.titleFontSize,
+            color: Colors[colorScheme].foregroundColor,
             textAlign: 'center',
         },
         button: {
             width: '70%',
-            marginTop: Dimensions.xLargeMargin,
-            marginBottom: Dimensions.xxLargeMargin,
+            marginTop: Dimensions.normalMargin,
+        },
+        campaignContainer: {
+            marginHorizontal: Dimensions.xLargeMargin,
+            marginVertical: Dimensions.smallMargin,
+            borderWidth: 1,
+            borderColor: Colors.staticColors.black,
+            padding: Dimensions.normalMargin,
         },
     });
 }

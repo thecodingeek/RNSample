@@ -7,7 +7,6 @@ const Dimensions = {
     xLargeFontSize: 18,
     xxLargeFontSize: 22,
     titleFontSize: 30,
-    headerFontSize: 40,
     
     // Padding & Margins
     xSmallMargin: 3,

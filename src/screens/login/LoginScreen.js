@@ -7,7 +7,7 @@ import MyTextInput from '../../components/textInput/MyTextInput';
 import MyButton from '../../components/button/MyButton';
 import screenStyles from './styles';
 import { isEmailValid, showAlertDialog } from '../../helpers/HelperFunctions';
-import { getString } from '../../storage/AsyncStorageHelper';
+import { getString, storeString, } from '../../storage/AsyncStorageHelper';
 
 const LoginScreen = (props) => {
     const { navigation } = props;
@@ -56,6 +56,7 @@ const LoginScreen = (props) => {
 
         if(availableUser.email) {
             if(availableUser.email === user.email && availableUser.password === user.password) {
+                await storeString(AsyncStorageKeys.IS_USER_LOGGED_IN, 'true');
                 navigation.replace(ScreenNames.HOME_SCREEN);
             } else {
                 showAlertDialog('', 'Invalid Credentials');    
